@@ -23,7 +23,13 @@ function do_roll() {
   var d_size = document.getElementById("d").value;
   var result = roll(num_dice, d_size);
   var el = document.getElementById("roll");
-  el.innerHTML = result;
+  el.value = result;
+}
+
+function roll_several(num_times) {
+  for (i = 0; i < num_times; i++) {
+    setTimeout(function() { do_roll(); }, i * 100);
+  }
 }
 </script>
 </head>
@@ -31,17 +37,19 @@ function do_roll() {
 <div id="topbar">
   <div id="title">iPhone Web Dice Roller</div>
 </div>
-<ul class="pageitem" id="roll" align="center" style="font-size: 48px;">
-???
-</ul>
-</div>
 <form>
 <fieldset>
+<span class="graytitle">Press to roll</span>
+<ul class="pageitem">
+<li class="button" style="height: 58px;">
+<input id="roll" name="submit" type="button" value="Roll the dice" style="font-size: 36px;" onclick="roll_several(10); return false;">
+</li>
+</ul>
 <ul class="pageitem">
 <li class="select">
 <select id="quantity" name="quantity">
 <option value="1">1</option>
-<option value="2">2</option>
+<option value="2" selected>2</option>
 <option value="3">3</option>
 <option value="4">4</option>
 <option value="5">5</option>
@@ -53,16 +61,13 @@ function do_roll() {
 <li class="select">
 <select id="d" name="d">
 <option value="4">d4</option>
-<option value="6">d6</option>
+<option value="6" selected>d6</option>
 <option value="8">d8</option>
 <option value="10">d10</option>
 <option value="12">d12</option>
 <option value="20">d20</option>
 <option value="100">d100</option>
 </select>
-<li class="button">
-<input name="submit" type="button" value="Roll the dice" onclick="do_roll(); return false;">
-</li>
 </ul>
 </fieldset>
 </form>
