@@ -6,6 +6,20 @@
 <meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />
 <link href="css/style.css" type="text/css" rel="stylesheet" />
 <script src="javascript/functions.js" type="text/javascript"></script>
+<script src="javascript/soundmanager2.js" type="text/javascript"></script>
+<!--<script src="javascript/soundmanager2-nodebug-jsmin.js" type="text/javascript"></script>-->
+<script type="text/javascript">
+  soundManager.useHTML5Audio = true;
+  soundManager.url = 'swf/';
+  var dicerollSound;
+  soundManager.onready(function() {
+    // Ready to use; soundManager.createSound() etc. can now be called.
+    dicerollSound = soundManager.createSound({
+      id: 'diceroll',
+      url: 'diceroll.mp3',
+    });
+  });
+</script>
 <link rel="apple-touch-icon" href="images/icon.png"/>
 <link href="images/loading.png" rel="apple-touch-startup-image"/>
 <script language="javascript">
@@ -27,6 +41,7 @@ function do_roll() {
 }
 
 function roll_several(num_times) {
+  dicerollSound.play();
   for (i = 0; i < num_times; i++) {
     setTimeout(function() { do_roll(); }, i * 100);
   }
