@@ -5,4 +5,23 @@ api_version: 1
 
 handlers:
 - url: /
-  static_dir: static
+  static_files: static/index.html
+  upload: static/index.html
+
+- url: /css
+  static_dir: static/css
+
+- url: /images
+  static_dir: static/images
+
+- url: /javascript
+  static_dir: static/javascript
+
+- url: /sounds
+  static_dir: static/sounds
+
+- url: /swf
+  static_dir: static/swf
+
+- url: /.*
+  static_dir: static/
