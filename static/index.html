@@ -29,28 +29,37 @@ if ('standalone' in navigator && !navigator.standalone && (/iphone|ipod|ipad/gi)
 <link rel="apple-touch-icon-precomposed" href="images/icon.png"/>
 <link href="images/loading.png" rel="apple-touch-startup-image"/>
 <script language="javascript">
-function roll(num_dice, d_size) {
-  var result = 0;
+function roll(num_dice, d_size, last_roll) {
+  var total = 0;
+  var rolls = new Array();
   var i = 0;
   for (i = 0; i < num_dice; i++) {
-    result += 1 + Math.floor(Math.random() * d_size);
+    rolls[i] = 1 + Math.floor(Math.random() * d_size);
+    total += rolls[i];
   }
-  return result;
+
+  rolls.sort(function(a,b){return b-a});
+
+  if (num_dice != 1 && last_roll)
+    return rolls.join(" + ") + " = " + total;
+  else
+    return total;
 }
 
-function do_roll() {
+function do_roll(last_roll) {
   var num_dice = document.getElementById("quantity").value;
   var d_size = document.getElementById("d").value;
-  var result = roll(num_dice, d_size);
+  var result = roll(num_dice, d_size, last_roll);
   var el = document.getElementById("roll");
   el.value = result;
 }
 
 function roll_several(num_times) {
   dicerollSound.play();
-  for (i = 0; i < num_times; i++) {
-    setTimeout(function() { do_roll(); }, i * 100);
+  for (i = 0; i < num_times - 1; i++) {
+    setTimeout(function() { do_roll(false); }, i * 100);
   }
+  setTimeout(function() { do_roll(true); }, (i + 1) * 100);
 }
 </script>
 </head>
