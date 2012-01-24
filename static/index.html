@@ -4,6 +4,8 @@
 <meta content="yes" name="apple-mobile-web-app-capable" />
 <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
 <meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />
+<link rel="apple-touch-icon-precomposed" href="images/icon.png"/>
+<link href="images/loading.png" rel="apple-touch-startup-image"/>
 <link href="css/iphone.css" type="text/css" rel="stylesheet" />
 <script src="javascript/functions.js" type="text/javascript"></script>
 <link href="css/add2home.css" type="text/css" rel="stylesheet">
@@ -26,8 +28,7 @@ if ('standalone' in navigator && !navigator.standalone && (/iphone|ipod|ipad/gi)
     });
   });
 </script>
-<link rel="apple-touch-icon-precomposed" href="images/icon.png"/>
-<link href="images/loading.png" rel="apple-touch-startup-image"/>
+<script src="javascript/shake.js" type="text/javascript"></script>
 <script language="javascript">
 function roll(num_dice, d_size, last_roll) {
   var total = 0;
@@ -60,6 +61,11 @@ function roll_several(num_times) {
     setTimeout(function() { do_roll(false); }, i * 100);
   }
   setTimeout(function() { do_roll(true); }, (i + 1) * 100);
+}
+
+window.addEventListener('shake', shakeEventDidOccur, false);
+function shakeEventDidOccur() {
+  roll_several(10);
 }
 </script>
 </head>
