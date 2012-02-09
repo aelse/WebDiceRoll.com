@@ -23,6 +23,7 @@ if ('standalone' in navigator && !navigator.standalone && (/iphone|ipod|ipad/gi)
   soundManager.onready(function() {
     // Ready to use; soundManager.createSound() etc. can now be called.
     dicerollSound = soundManager.createSound({
+      autoLoad: true,
       id: 'diceroll',
       url: 'sounds/diceroll.mp3',
     });
