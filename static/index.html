@@ -54,6 +54,12 @@ function do_roll(last_roll) {
   var result = roll(num_dice, d_size, last_roll);
   var el = document.getElementById("roll");
   el.value = result;
+
+  /* Primitive font size scaling to fit output in button */
+  if (num_dice >= 4)
+    el.style.cssText = "font-size: "+ (30 - (num_dice - 4) * 3) + "px;";
+  else
+    el.style.cssText = "font-size: 36px;";
 }
 
 function roll_several(num_times) {
